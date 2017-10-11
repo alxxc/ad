@@ -13,7 +13,11 @@ class AdType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('theme')->add('timeCreated')->add('timeUpdated')->add('user')->add('tags');
+        $builder
+            ->add('title')
+            ->add('description')
+            ->add('theme')
+            ->add('tags');
     }
     
     /**
@@ -21,9 +25,9 @@ class AdType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\Ad'
-        ));
+        ]);
     }
 
     /**
@@ -33,6 +37,4 @@ class AdType extends AbstractType
     {
         return 'appbundle_ad';
     }
-
-
 }

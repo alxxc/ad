@@ -7,7 +7,6 @@ use AppBundle\Entity\{
     Tag
 };
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class Fixtures extends Fixture
@@ -18,18 +17,22 @@ class Fixtures extends Fixture
         $manager->persist(
             (new User())
                 ->setUsername("admin")
-                ->setPassword("admin")
+                ->setPlainPassword("admin")
                 ->setEmail("admin@local")
                 ->setFio("admin")
+                ->setSuperAdmin(true)
+                ->setEnabled(true)
         );
 
         // create simple user
         $manager->persist(
             (new User())
                 ->setUsername("user")
-                ->setPassword("user")
+                ->setPlainPassword("user")
                 ->setEmail("user@local")
                 ->setFio("user")
+                ->addRole("ROLE_USER")
+                ->setEnabled(true)
         );
 
         // create 30 users
@@ -38,7 +41,7 @@ class Fixtures extends Fixture
             $manager->persist(
                 $users[] = (new User())
                     ->setUsername("fixtureUser$i")
-                    ->setPassword("fixturePassword$i")
+                    ->setPlainPassword("fixturePassword$i")
                     ->setEmail("fixtureUser$i@local")
                     ->setFio("Family$i Name$i Surname$i")
             );

@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Tag controller.
@@ -34,6 +36,7 @@ class TagController extends Controller
     /**
      * Creates a new tag entity.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/new", name="tag_new")
      * @Method({"GET", "POST"})
      */
@@ -76,6 +79,7 @@ class TagController extends Controller
     /**
      * Displays a form to edit an existing tag entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="tag_edit")
      * @Method({"GET", "POST"})
      */
@@ -101,6 +105,7 @@ class TagController extends Controller
     /**
      * Deletes a tag entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="tag_delete")
      * @Method("DELETE")
      */

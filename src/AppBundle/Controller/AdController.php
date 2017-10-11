@@ -5,12 +5,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Ad;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Ad controller.
- *
- * @Route("ad")
  */
 class AdController extends Controller
 {
@@ -24,7 +24,7 @@ class AdController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ads = $em->getRepository('AppBundle:Ad')->findAll();
+        $ads = $em->getRepository('AppBundle:Ad')->findBy([], ['timeUpdated' => 'desc']);
 
         return $this->render('ad/index.html.twig', array(
             'ads' => $ads,
@@ -34,7 +34,8 @@ class AdController extends Controller
     /**
      * Creates a new ad entity.
      *
-     * @Route("/new", name="ad_new")
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/ad/new", name="ad_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -42,6 +43,8 @@ class AdController extends Controller
         $ad = new Ad();
         $form = $this->createForm('AppBundle\Form\AdType', $ad);
         $form->handleRequest($request);
+
+        $ad->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -60,7 +63,7 @@ class AdController extends Controller
     /**
      * Finds and displays a ad entity.
      *
-     * @Route("/{id}", name="ad_show")
+     * @Route("/ad/{id}", name="ad_show")
      * @Method("GET")
      */
     public function showAction(Ad $ad)
@@ -76,7 +79,8 @@ class AdController extends Controller
     /**
      * Displays a form to edit an existing ad entity.
      *
-     * @Route("/{id}/edit", name="ad_edit")
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/ad/{id}/edit", name="ad_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Ad $ad)
@@ -101,6 +105,7 @@ class AdController extends Controller
     /**
      * Deletes a ad entity.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}", name="ad_delete")
      * @Method("DELETE")
      */
