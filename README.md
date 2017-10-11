@@ -1,4 +1,9 @@
-ad
+Сервис объявлений
 ==
 
-A Symfony project created on October 11, 2017, 6:35 pm.
+Deploy
++ git clone 
++ composer install
++ bin/console doctrine:database:create
++ bin/console doctrine:schema:update --force
++ bin/console doctrine:fixtures:load

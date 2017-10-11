@@ -23,4 +23,28 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=200)
      */
     protected $fio;
+
+    /**
+     * Set fio
+     *
+     * @param string $fio
+     *
+     * @return User
+     */
+    public function setFio($fio)
+    {
+        $this->fio = $fio;
+
+        return $this;
+    }
+
+    /**
+     * Get fio
+     *
+     * @return string
+     */
+    public function getFio()
+    {
+        return $this->fio;
+    }
 }
