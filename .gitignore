@@ -1,0 +1,11 @@
+var/cache/**
+var/logs/**
+var/bootstrap.php.cache
+vendor/**
+.idea
+app/config/parameters.yml
+var/sessions/**
+web/bundles/**
+web/js/**
+bin/symfony_requirements
+web/config.php
