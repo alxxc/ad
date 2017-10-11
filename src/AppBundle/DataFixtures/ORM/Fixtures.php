@@ -14,6 +14,24 @@ class Fixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        // create admin
+        $manager->persist(
+            (new User())
+                ->setUsername("admin")
+                ->setPassword("admin")
+                ->setEmail("admin@local")
+                ->setFio("admin")
+        );
+
+        // create simple user
+        $manager->persist(
+            (new User())
+                ->setUsername("user")
+                ->setPassword("user")
+                ->setEmail("user@local")
+                ->setFio("user")
+        );
+
         // create 30 users
         $users = [];
         for ($i = 0; $i < 30; $i++) {
