@@ -1,16 +1,15 @@
 <?php
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Сущность юзера
+ * Сущность тэга объявлений
  *
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="tag")
  */
-class User extends BaseUser
+class Tag
 {
     /**
      * @ORM\Id
@@ -20,7 +19,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * Заголовок
+     *
+     * @ORM\Column(type="string", length=200, unique=true)
      */
-    protected $fio;
+    protected $title;
 }
