@@ -2,7 +2,7 @@
 ==
 
 Deploy
-+ git clone 
++ git clone https://github.com/alxxc/ad.git
 + composer install
 + bin/console doctrine:database:create
 + bin/console doctrine:schema:update --force
